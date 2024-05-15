@@ -19,6 +19,6 @@ RUN curl -fSsLO https://github.com/mike-engel/jwt-cli/releases/download/${JWT_VE
     tar zxf jwt-linux.tar.gz && \
     mv jwt /usr/bin
 
-ENV KUBECTL_VERSION=1.29.0
+ENV KUBECTL_VERSION=1.30.0
 RUN curl -fsSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
   && chmod +x /usr/local/bin/kubectl

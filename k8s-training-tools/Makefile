@@ -1,5 +1,5 @@
 .PHONY: build push
-image_name=zenika/k8s-training-tools:v4
+image_name=zenika/k8s-training-tools:v5
 
 build:
 	docker image build -t $(image_name) .
