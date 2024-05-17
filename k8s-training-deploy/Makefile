@@ -1,5 +1,5 @@
 .PHONY: build-v1 push-v1 build-v2 push-v2 build push
-image_name=zenika/k8s-training-deploy
+image_name=ghcr.io/zenika-training/k8s-training-deploy
 
 build-v1: version=v1
 build-v1: build
