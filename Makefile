@@ -1,5 +1,5 @@
 .PHONY: build-all push-all
-images=k8s-training-tools k8s-training-stress
+images=k8s-training-tools k8s-training-stress securedev-training-curlbot
 
 build-all:
 	for image in $(images) ; do \
