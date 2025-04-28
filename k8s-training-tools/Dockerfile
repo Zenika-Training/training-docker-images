@@ -17,8 +17,9 @@ RUN set -eux; \
 ENV JWT_VERSION=6.0.0
 RUN curl -fSsLO https://github.com/mike-engel/jwt-cli/releases/download/${JWT_VERSION}/jwt-linux.tar.gz && \
     tar zxf jwt-linux.tar.gz && \
+    rm /jwt-linux.tar.gz && \
     mv jwt /usr/bin
 
-ENV KUBECTL_VERSION=1.30.0
-RUN curl -fsSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+ENV KUBECTL_VERSION=v1.32.0
+RUN curl -fsSLo /usr/local/bin/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
   && chmod +x /usr/local/bin/kubectl
