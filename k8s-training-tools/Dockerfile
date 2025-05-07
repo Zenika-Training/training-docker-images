@@ -20,6 +20,6 @@ RUN curl -fSsLO https://github.com/mike-engel/jwt-cli/releases/download/${JWT_VE
     rm /jwt-linux.tar.gz && \
     mv jwt /usr/bin
 
-ENV KUBECTL_VERSION=v1.32.0
+ENV KUBECTL_VERSION=v1.33.0
 RUN curl -fsSLo /usr/local/bin/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/arm64/kubectl \
   && chmod +x /usr/local/bin/kubectl
