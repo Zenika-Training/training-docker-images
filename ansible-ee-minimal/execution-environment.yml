@@ -1,0 +1,54 @@
+---
+version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+
+options:
+  package_manager_path: /usr/bin/apt-get
+  skip_ansible_check: true
+  container_init:
+    package_pip: dumb-init>=1.2.5
+    entrypoint: '["/opt/builder/bin/entrypoint"]'
+    cmd: '["bash"]'
+
+dependencies:
+  ansible_core:
+    package_pip: ansible-core==2.17.12
+  ansible_runner:
+    package_pip: ansible-runner==2.4.1
+  python_interpreter:
+    python_path: "/opt/venv/bin/python3"
+  galaxy:
+    collections:
+      - name: zenika.training
+        source: https://github.com/Zenika-Training/ansible_collection.git
+        type: git
+        version: main
+  system:
+    - ssh
+    - sshpass
+
+images:
+  base_image:
+    name: debian:12.11-slim
+
+additional_build_steps:
+  prepend_base: |
+    ENV VIRTUAL_ENV=/opt/venv
+    ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+    RUN apt-get update \
+      && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends -o APT::Get::AllowUnauthenticated=true install \
+      git \
+      python3 \
+      python3-pip \
+      python3-venv \
+      && python3 -m venv /opt/venv \
+      && pip install --no-cache-dir --upgrade pip
+  append_final: |
+    ENV VIRTUAL_ENV=/opt/venv
+    ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+    RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+      && apt-get autoclean \
+      && apt-get clean all \
+      && rm -rf /var/lib/apt/lists/*

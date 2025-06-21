@@ -1,5 +1,5 @@
 .PHONY: build-all push-all
-images=k8s-training-tools k8s-training-stress securedev-training-curlbot
+images=k8s-training-tools k8s-training-stress securedev-training-curlbot ansible-ee-minimal
 
 build-all:
 	for image in $(images) ; do \
