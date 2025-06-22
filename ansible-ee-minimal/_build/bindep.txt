@@ -1,2 +1,4 @@
+curl
+jq
 ssh
 sshpass

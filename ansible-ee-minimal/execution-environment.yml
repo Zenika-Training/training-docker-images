@@ -26,6 +26,8 @@ dependencies:
         type: git
         version: main
   system:
+    - curl
+    - jq
     - ssh
     - sshpass
 
