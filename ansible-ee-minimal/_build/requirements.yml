@@ -1,0 +1,5 @@
+collections:
+- name: zenika.training
+  source: https://github.com/Zenika-Training/ansible_collection.git
+  type: git
+  version: main
