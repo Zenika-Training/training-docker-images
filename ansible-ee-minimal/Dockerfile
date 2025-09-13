@@ -1,4 +1,4 @@
-ARG EE_BASE_IMAGE="debian:12.11-slim"
+ARG EE_BASE_IMAGE="debian:13.1-slim"
 ARG PYCMD="/opt/venv/bin/python3"
 ARG PKGMGR_PRESERVE_CACHE=""
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS="--pre"
