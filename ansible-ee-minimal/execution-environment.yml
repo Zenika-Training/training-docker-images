@@ -28,6 +28,7 @@ dependencies:
   system:
     - curl
     - jq
+    - less
     - ssh
     - sshpass
 
