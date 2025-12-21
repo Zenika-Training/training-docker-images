@@ -7,7 +7,7 @@ ARG ANSIBLE_INSTALL_REFS="ansible-core==2.17.14 ansible-runner==2.4.2"
 ARG PKGMGR="/usr/bin/apt-get"
 
 # Base build stage
-FROM $EE_BASE_IMAGE as base
+FROM $EE_BASE_IMAGE AS base
 USER root
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ARG EE_BASE_IMAGE
@@ -34,7 +34,7 @@ RUN /output/scripts/pip_install $PYCMD
 RUN $PYCMD -m pip install --no-cache-dir $ANSIBLE_INSTALL_REFS
 
 # Galaxy build stage
-FROM base as galaxy
+FROM base AS galaxy
 ARG EE_BASE_IMAGE
 ARG PYCMD
 ARG PKGMGR_PRESERVE_CACHE
@@ -52,7 +52,7 @@ RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.ym
 RUN ANSIBLE_GALAXY_DISABLE_GPG_VERIFY=1 ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path "/usr/share/ansible/collections"
 
 # Builder build stage
-FROM base as builder
+FROM base AS builder
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 WORKDIR /build
 ARG EE_BASE_IMAGE
@@ -72,7 +72,7 @@ RUN $PYCMD /output/scripts/introspect.py introspect --user-bindep=bindep.txt --w
 RUN /output/scripts/assemble
 
 # Final build stage
-FROM base as final
+FROM base AS final
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ARG EE_BASE_IMAGE
 ARG PYCMD
