@@ -1,5 +1,5 @@
 .PHONY: cleanup create build_with_podman
-image_name=ghcr.io/zenika-training/ansible-ee-minimal:2.17.14
+image_name=ghcr.io/zenika-training/ansible-ee-minimal:2.20.3
 
 cleanup:
 	rm -rf _build
